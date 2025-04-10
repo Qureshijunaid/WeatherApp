@@ -23,25 +23,25 @@ A sleek and modern React Native Weather Application that allows users to search 
 
 weatherApp/
 ├── src/
-│ ├── components/ # Reusable UI components
-│ │ ├── ErrorCard.tsx # Error display component
-│ │ ├── LoaderComponent.tsx # Lottie loading animation
-│ │ ├── NoDataInformationCard.tsx # Empty state card
-│ │ ├── SearchBarComponent.tsx # Input for city search
-│ │ ├── WeatherCardComponent.tsx # Main weather display
-│ ├── screens/
-│ │ ├── WelcomeScreen.tsx # Main UI with search + results
-│ ├── redux/
-│ │ ├── slice/ # Redux slices (weather reducers/actions)
-│ ├── constant/ # Constants like API keys and weather types
-│ ├── assets/ # Images, icons, and animations
-│ ├── theme.ts # Global theming and colors
-├── **tests**/ # Jest test cases
-├── App.tsx # App entry point
-├── babel.config.js # Babel config
-├── jest.config.js # Jest config
+│   ├── components/                  # Reusable UI components
+│   │   ├── ErrorCard.tsx           # Error display component
+│   │   ├── LoaderComponent.tsx     # Lottie loading animation
+│   │   ├── NoDataInformationCard.tsx # Message when no data is available
+│   │   ├── SearchBarComponent.tsx  # Input for city search
+│   │   ├── WeatherCardComponent.tsx # Displays current weather
+│   ├── screens/
+│   │   ├── WelcomeScreen.tsx       # Home screen with search and weather display
+│   ├── redux/
+│   │   ├── slice/                  # Redux slices (actions & reducers)
+│   ├── constant/                   # Constants like API keys and weather codes
+│   ├── assets/                     # Images, icons, Lottie animations
+│   ├── theme.ts                    # Global styling and theme configuration
+├── **tests**/                      # Jest unit tests for components
+├── App.tsx                         # Entry point of the application
+├── babel.config.js                 # Babel compiler configuration
+├── jest.config.js                  # Jest testing framework configuration
 
----
+
 
 🧩 Architecture
 
