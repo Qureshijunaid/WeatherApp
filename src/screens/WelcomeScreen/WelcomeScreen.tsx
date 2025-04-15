@@ -1,30 +1,33 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState, useRef } from "react";
+import { ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useDispatch, useSelector } from "react-redux";
+import styles from "./styles";
 
-import { fetchWeatherData } from '../redux/slice/weatherSlice';
+import { fetchWeatherData } from "../../redux/slice/weatherSlice";
 import {
   ErrorCard,
   WeatherCardComponent,
   SearchBarComponent,
   NoDataInformationCard,
   LoaderComponent,
-} from '../components';
-import { RootState } from '../redux/store';
+} from "../../components";
+import { RootState } from "../../redux/store";
 
 const WelcomeScreen: React.FC = () => {
   const dispatch = useDispatch();
-  const { error = false, loading = 'idle', weatherData = {} } = useSelector(
-    (state: RootState) => state.weather || {}
-  );
+  const {
+    error = false,
+    loading = "idle",
+    weatherData = {},
+  } = useSelector((state: RootState) => state.weather || {});
 
-  const [city, setCity] = useState<string>('');
+  const [city, setCity] = useState<string>("");
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
 
   // Fetch weather data for the given city
   const handleSearchWeather = async (searchQuery: string) => {
-    if (searchQuery.trim() === '') return; // Avoid unnecessary API calls for empty searches
+    if (searchQuery.trim() === "") return; // Avoid unnecessary API calls for empty searches
     try {
       await dispatch(fetchWeatherData(searchQuery));
     } catch (err) {
@@ -53,11 +56,11 @@ const WelcomeScreen: React.FC = () => {
   }, []);
 
   const renderContent = () => {
-    if (error && loading === 'failed') {
+    if (error && loading === "failed") {
       return <ErrorCard />;
     }
 
-    if (loading === 'pending') {
+    if (loading === "pending") {
       return <LoaderComponent />;
     }
 
@@ -83,12 +86,3 @@ const WelcomeScreen: React.FC = () => {
 };
 
 export default WelcomeScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 7,
-    gap: 15,
-    backgroundColor: '#808080',
-  },
-});

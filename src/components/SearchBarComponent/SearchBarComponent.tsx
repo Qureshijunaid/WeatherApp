@@ -1,11 +1,12 @@
 import {
   Image,
-  StyleSheet,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
-import theme from "../theme";
+
+import styles from "./styles";
+import theme from "../../theme";
 
 type Props = {
   value: string;
@@ -31,7 +32,7 @@ const SearchBar = ({ value, onChange, onSearch }: Props) => {
       >
         <Image
           style={styles.icon}
-          source={require("../assets/icon/searchicon.png")}
+          source={require("../../assets/icon/searchicon.png")}
         />
       </TouchableOpacity>
     </View>
@@ -39,32 +40,3 @@ const SearchBar = ({ value, onChange, onSearch }: Props) => {
 };
 
 export default SearchBar;
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    borderWidth: 1,
-    borderRadius: 30,
-    padding: 5,
-    borderColor: theme.color.primary.white,
-    backgroundColor: theme.color.primary.black,
-  },
-  input: {
-    paddingHorizontal: 10,
-    ...theme.typography.placeholderLables,
-  },
-  button: {
-    backgroundColor: theme.color.primary.white,
-    width: 42,
-    height: 42,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 60,
-  },
-  icon: {
-    height: 24,
-    width: 24,
-  },
-});

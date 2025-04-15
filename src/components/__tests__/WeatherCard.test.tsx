@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import WeatherCardComponent from '../WeatherCardComponent';
+import WeatherCardComponent from '../WeatherCardComponent/WeatherCardComponent';
 
 const mockStore = configureStore([]);
 

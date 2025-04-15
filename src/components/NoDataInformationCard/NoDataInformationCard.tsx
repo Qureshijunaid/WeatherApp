@@ -1,7 +1,8 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { Text } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import theme from "../theme";
+
+import styles from "./styles";
 
 type Props = {};
 
@@ -26,22 +27,3 @@ const NoDataInformationCard = ({}: Props) => {
 };
 
 export default NoDataInformationCard;
-
-const styles = StyleSheet.create({
-  container: {
-    width: "auto",
-    height: 400,
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 10,
-    padding: 10,
-    borderRadius: 30,
-  },
-  title: {
-    ...theme.typography.heading.heading1,
-    textTransform: "uppercase",
-  },
-  description: {
-    ...theme.typography.bodyMedium.medium,
-  },
-});
