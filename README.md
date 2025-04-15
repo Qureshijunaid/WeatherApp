@@ -19,29 +19,31 @@ A sleek and modern React Native Weather Application that allows users to search 
 
 ---
 
-📁 Folder Structure
+## 📁 Folder Structure
 
-weatherApp/
-├── src/
-│   ├── components/                  # Reusable UI components
-│   │   ├── ErrorCard.tsx           # Error display component
-│   │   ├── LoaderComponent.tsx     # Lottie loading animation
-│   │   ├── NoDataInformationCard.tsx # Message when no data is available
-│   │   ├── SearchBarComponent.tsx  # Input for city search
-│   │   ├── WeatherCardComponent.tsx # Displays current weather
-│   ├── screens/
-│   │   ├── WelcomeScreen.tsx       # Home screen with search and weather display
-│   ├── redux/
-│   │   ├── slice/                  # Redux slices (actions & reducers)
-│   ├── constant/                   # Constants like API keys and weather codes
-│   ├── assets/                     # Images, icons, Lottie animations
-│   ├── theme.ts                    # Global styling and theme configuration
-├── **tests**/                      # Jest unit tests for components
-├── App.tsx                         # Entry point of the application
-├── babel.config.js                 # Babel compiler configuration
-├── jest.config.js                  # Jest testing framework configuration
+| Folder / File                              | Description                                 |
+| ------------------------------------------ | ------------------------------------------- |
+| `weatherApp/`                              | Root folder                                 |
+| `src/`                                     | Main source folder                          |
+| `src/components/`                          | Reusable UI components                      |
+| `src/components/ErrorCard.tsx`             | Error display component                     |
+| `src/components/LoaderComponent.tsx`       | Lottie loading animation                    |
+| `src/components/NoDataInformationCard.tsx` | Message when no data is available           |
+| `src/components/SearchBarComponent.tsx`    | Input for city search                       |
+| `src/components/WeatherCardComponent.tsx`  | Displays current weather                    |
+| `src/screens/`                             | Application screens                         |
+| `src/screens/WelcomeScreen.tsx`            | Home screen with search and weather display |
+| `src/redux/`                               | Redux-related files                         |
+| `src/redux/slice/`                         | Redux slices (actions & reducers)           |
+| `src/constant/`                            | Constants like API keys and weather codes   |
+| `src/assets/`                              | Images, icons, Lottie animations            |
+| `src/theme.ts`                             | Global styling and theme configuration      |
+| `tests/`                                   | Jest unit tests for components              |
+| `App.tsx`                                  | Entry point of the application              |
+| `babel.config.js`                          | Babel compiler configuration                |
+| `jest.config.js`                           | Jest testing framework configuration        |
 
-
+---
 
 🧩 Architecture
 
