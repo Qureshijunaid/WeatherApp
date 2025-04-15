@@ -1,7 +1,7 @@
-import {color} from './color';
-import {fontSize} from './fontSize';
-import {fontStyle} from './fontStyle';
-import {fontWeight} from './fontWeight';
+import { color } from "./color";
+import { fontSize } from "./fontSize";
+import { fontStyle } from "./fontStyle";
+import { fontWeight } from "./fontWeight";
 
 export const typography = {
   heading: {

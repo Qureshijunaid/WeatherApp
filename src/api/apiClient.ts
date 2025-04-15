@@ -3,14 +3,14 @@ import axios, {
   AxiosRequestConfig,
   AxiosResponse,
   AxiosError,
-} from 'axios';
-import constant from '../constant/constant';
+} from "axios";
+import constant from "../constant/constant";
 
 // Create and configure Axios instance
 const apiClient: AxiosInstance = axios.create({
   baseURL: constant.baseURL,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 

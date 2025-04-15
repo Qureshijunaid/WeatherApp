@@ -1,6 +1,6 @@
-import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import WelcomeScreen from '../screens/WelcomeScreen';
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import WelcomeScreen from "../screens/WelcomeScreen";
 
 type Props = {};
 
@@ -10,7 +10,8 @@ const StackNavigation = ({}: Props) => {
   return (
     <Stack.Navigator
       initialRouteName="Welcome"
-      screenOptions={{headerShown: false}}>
+      screenOptions={{ headerShown: false }}
+    >
       <Stack.Screen name="Welcome" component={WelcomeScreen} />
     </Stack.Navigator>
   );

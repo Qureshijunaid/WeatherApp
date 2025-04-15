@@ -1,4 +1,4 @@
-import {normalize} from '../utils/dimension';
+import { normalize } from "../utils/dimension";
 
 export const fontSize = {
   s5: normalize(5),

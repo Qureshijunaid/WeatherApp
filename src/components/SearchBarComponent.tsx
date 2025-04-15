@@ -4,8 +4,8 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-} from 'react-native';
-import theme from '../theme';
+} from "react-native";
+import theme from "../theme";
 
 type Props = {
   value: string;
@@ -13,7 +13,7 @@ type Props = {
   onSearch: () => void;
 };
 
-const SearchBar = ({value, onChange, onSearch}: Props) => {
+const SearchBar = ({ value, onChange, onSearch }: Props) => {
   return (
     <View style={styles.container}>
       <TextInput
@@ -27,10 +27,11 @@ const SearchBar = ({value, onChange, onSearch}: Props) => {
         accessibilityRole="button"
         disabled={value.length < 2}
         onPress={onSearch}
-        style={styles.button}>
+        style={styles.button}
+      >
         <Image
           style={styles.icon}
-          source={require('../assets/icon/searchicon.png')}
+          source={require("../assets/icon/searchicon.png")}
         />
       </TouchableOpacity>
     </View>
@@ -41,9 +42,9 @@ export default SearchBar;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     borderWidth: 1,
     borderRadius: 30,
     padding: 5,
@@ -58,8 +59,8 @@ const styles = StyleSheet.create({
     backgroundColor: theme.color.primary.white,
     width: 42,
     height: 42,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 60,
   },
   icon: {
