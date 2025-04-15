@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
+import NetInfo from "@react-native-community/netinfo"; 
 import styles from "./styles";
 
 import { fetchWeatherData } from "../../redux/slice/weatherSlice";
@@ -11,6 +12,7 @@ import {
   SearchBarComponent,
   NoDataInformationCard,
   LoaderComponent,
+  NoInternetCard,
 } from "../../components";
 import { RootState } from "../../redux/store";
 
@@ -23,11 +25,42 @@ const WelcomeScreen: React.FC = () => {
   } = useSelector((state: RootState) => state.weather || {});
 
   const [city, setCity] = useState<string>("");
+  const [isConnected, setIsConnected] = useState<boolean>(true); // State to track internet connection
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  // Check for internet connection
+  const checkInternetConnection = () => {
+    NetInfo.fetch().then((state) => {
+      setIsConnected(state.isConnected); // Update state based on connection
+      if (!state.isConnected) {
+        Alert.alert("No internet connection", "Please check your network connection.");
+      }
+    });
+  };
+
+  useEffect(() => {
+    checkInternetConnection();
+
+    // Add event listener to listen for connection change
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      setIsConnected(state.isConnected);
+    });
+
+    return () => {
+      unsubscribe(); // Cleanup the listener on component unmount
+    };
+  }, []);
 
   // Fetch weather data for the given city
   const handleSearchWeather = async (searchQuery: string) => {
     if (searchQuery.trim() === "") return; // Avoid unnecessary API calls for empty searches
+
+    // Only fetch weather data if the user is connected to the internet
+    if (!isConnected) {
+      Alert.alert("No internet", "Please connect to the internet to fetch weather data.");
+      return;
+    }
+
     try {
       await dispatch(fetchWeatherData(searchQuery));
     } catch (err) {
@@ -56,6 +89,10 @@ const WelcomeScreen: React.FC = () => {
   }, []);
 
   const renderContent = () => {
+    if (!isConnected) {
+      return <NoInternetCard />; // Show NoInternetCard if not connected
+    }
+
     if (error && loading === "failed") {
       return <ErrorCard />;
     }
