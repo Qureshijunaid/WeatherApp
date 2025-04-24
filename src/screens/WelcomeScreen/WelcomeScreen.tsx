@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
+
 import { ScrollView, Alert, Text, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
+import NetInfo from "@react-native-community/netinfo";
+
 import { useTheme } from "../../context/ThemeContext";
 import { lightTheme, darkTheme } from "../../theme/theme";
-import NetInfo from "@react-native-community/netinfo";
 import styles from "./styles";
-
 import { fetchWeatherData } from "../../redux/slice/weatherSlice";
 import {
   ErrorCard,

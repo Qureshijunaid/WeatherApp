@@ -1,32 +1,33 @@
 import { StyleSheet } from "react-native";
+
 import theme from "../../theme";
 
 const styles = StyleSheet.create({
-    container: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-      borderWidth: 1,
-      borderRadius: 30,
-      padding: 5,
-      borderColor: theme.color.primary.white,
-      backgroundColor: theme.color.primary.black,
-    },
-    input: {
-      paddingHorizontal: 10,
-      ...theme.typography.placeholderLables,
-    },
     button: {
-      backgroundColor: theme.color.primary.white,
-      width: 42,
-      height: 42,
       alignItems: "center",
-      justifyContent: "center",
+      backgroundColor: theme.color.primary.white,
       borderRadius: 60,
+      height: 42,
+      justifyContent: "center",
+      width: 42,
+    },
+    container: {
+      alignItems: "center",
+      backgroundColor: theme.color.primary.black,
+      borderColor: theme.color.primary.white,
+      borderRadius: 30,
+      borderWidth: 1,
+      flexDirection: "row",
+      justifyContent: "space-between",
+      padding: 5,
     },
     icon: {
       height: 24,
       width: 24,
+    },
+    input: {
+      paddingHorizontal: 10,
+      ...theme.typography.placeholderLables,
     },
   });
 

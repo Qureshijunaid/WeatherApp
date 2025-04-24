@@ -17,13 +17,13 @@ export function normalize(size: number) {
 
 // it will be used to resposive width of device relative to figma ui
 export const vw = (width: number) => {
-  let percent = (width / DesignWidth) * 100;
+  const percent = (width / DesignWidth) * 100;
   const elemWidth = parseFloat(percent + "%");
   return PixelRatio.roundToNearestPixel((screenWidth * elemWidth) / 100);
 };
 // it will be used to resposive height of device relative to figma ui
 export const vh = (height: number) => {
-  let percent = (height / DesignWidth) * 100;
+  const percent = (height / DesignWidth) * 100;
   const elemHeight = parseFloat(percent + "%");
   return PixelRatio.roundToNearestPixel((screenWidth * elemHeight) / 100);
 };

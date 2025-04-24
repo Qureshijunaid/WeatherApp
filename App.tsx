@@ -1,9 +1,11 @@
-import { StatusBar, StyleSheet, View } from "react-native";
 import React from "react";
+
+import { StatusBar, StyleSheet, View } from "react-native";
 import { Provider } from "react-redux";
-import { ThemeProvider } from './src/context/ThemeContext';
 import { PersistGate } from "redux-persist/integration/react";
 import { NavigationContainer } from "@react-navigation/native";
+
+import { ThemeProvider } from './src/context/ThemeContext';
 import StackNavigation from "./src/navigation/StackNavigation";
 import { persistor, store } from "./src/redux/store";
 
@@ -28,7 +30,7 @@ export default App;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "rgba(0,0,0,0.5)",
+    flex: 1,
   },
 });

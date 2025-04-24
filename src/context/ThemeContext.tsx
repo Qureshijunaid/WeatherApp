@@ -1,5 +1,6 @@
 // src/context/ThemeContext.tsx
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+
 import { useColorScheme } from 'react-native';
 
 type ThemeType = 'light' | 'dark';

@@ -1,8 +1,10 @@
 import React from "react";
+
 import { Text, View } from "react-native";
 import { useSelector } from "react-redux";
 import LinearGradient from "react-native-linear-gradient";
 import moment from "moment";
+
 import { useTheme } from "../../context/ThemeContext";
 import { lightTheme, darkTheme } from "../../theme/theme";
 import { weatherConditions } from "../../constant/weatherConditon";
