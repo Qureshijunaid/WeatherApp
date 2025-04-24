@@ -30,6 +30,7 @@ module.exports = {
     },
     ecmaVersion: 2020,
     sourceType: 'module',
+    project: './tsconfig.json',
   },
   rules: {
     'react/react-in-jsx-scope': 'off',

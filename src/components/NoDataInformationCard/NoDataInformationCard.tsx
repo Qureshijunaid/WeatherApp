@@ -2,6 +2,8 @@ import React from "react";
 
 import { Text } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
+import { useTheme } from "../../context/ThemeContext";
+import { lightTheme, darkTheme } from "../../theme/theme";
 
 import styles from "./styles";
 
@@ -14,13 +16,15 @@ const NO_DATA_STRING = {
 };
 
 const NoDataInformationCard = ({}: Props) => {
+  const { theme } = useTheme();
+  const colors = theme === "light" ? lightTheme : darkTheme;
   return (
     <LinearGradient
       style={styles.container}
-      colors={["black", "#343434", "#28282B"]}
+      colors={colors.gradienBackground}
     >
-      <Text style={styles.title}>{NO_DATA_STRING.WLCM}</Text>
-      <Text style={styles.description}>
+      <Text style={[styles.title, { color: colors.text }]}>{NO_DATA_STRING.WLCM}</Text>
+      <Text style={[styles.description, { color: colors.text }]}>
         {NO_DATA_STRING.GET_STARTED_MESSAGE}
       </Text>
     </LinearGradient>

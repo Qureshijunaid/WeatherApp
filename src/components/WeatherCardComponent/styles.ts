@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
   },
   container: {
-    gap: 10,
+     gap: 10,
     padding: vh(20),
   },
   date: {
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
   temperature: {
     ...theme.typography.heading.heading2,
-    fontSize: vw(62),
+    fontSize: vw(50),
     letterSpacing: 3,
     textAlign: "center",
     textTransform: "uppercase",

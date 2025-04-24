@@ -8,7 +8,6 @@ import {
 import styles from "./styles";
 import { useTheme } from "../../context/ThemeContext";
 import { lightTheme, darkTheme } from "../../theme/theme";
-import theme from "../../theme";
 
 type Props = {
   value: string;
