@@ -3,7 +3,8 @@ import { Text, View } from "react-native";
 import { useSelector } from "react-redux";
 import LinearGradient from "react-native-linear-gradient";
 import moment from "moment";
-import theme from "../../theme";
+import { useTheme } from "../../context/ThemeContext";
+import { lightTheme, darkTheme } from "../../theme/theme";
 import { weatherConditions } from "../../constant/weatherConditon";
 import { RootState } from "../../redux/store";
 import styles from "./styles";
@@ -12,6 +13,10 @@ type Props = {};
 
 const WeatherCardComponent = ({}: Props) => {
   const weather = useSelector((state: RootState) => state.weather);
+
+  const { theme } = useTheme();
+  const colors = theme === "light" ? lightTheme : darkTheme;
+
   const { current, location, forecast } = weather.weatherData || {};
   const { astro } = forecast?.forecastday?.[0] || {};
 
@@ -23,76 +28,94 @@ const WeatherCardComponent = ({}: Props) => {
 
   return (
     <>
-      <LinearGradient
-        style={styles.gradient}
-        colors={theme.color.gradient.darkBackground}
-      >
+      <LinearGradient style={styles.gradient} colors={colors.gradienBackground}>
         <View style={styles.container}>
           <Text style={styles.weatherLogo}>
             {getWeatherIcon(current?.condition?.code)}
           </Text>
-          <Text style={styles.temperature}>{current?.temp_c}°C</Text>
-          <Text style={styles.weatherDescription}>
+          <Text style={[styles.temperature, { color: colors.text }]}>
+            {current?.temp_c}°C
+          </Text>
+          <Text style={[styles.weatherDescription, { color: colors.text }]}>
             It's {current?.condition?.text} today
           </Text>
-          <Text style={styles.date}>
+          <Text style={[styles.date, { color: colors.text }]}>
             {moment.unix(location?.localtime_epoch).format("dddd, DD MMM")}
           </Text>
-          <Text style={styles.cityName}>
+          <Text style={[styles.cityName, { color: colors.text }]}>
             {location?.name}
             {location?.name !== location?.region && `,${location?.region}`}
           </Text>
         </View>
       </LinearGradient>
-      <LinearGradient
-        style={styles.gradient}
-        colors={theme.color.gradient.darkBackground}
-      >
+      <LinearGradient style={styles.gradient} colors={colors.gradienBackground}>
         <View style={styles.itemcontainer}>
           <View style={styles.box}>
-            <Text style={styles.icon}>🌡️</Text>
+            <Text style={[styles.icon, { color: colors.text }]}>🌡️</Text>
             <View>
-              <Text style={styles.title}>Feels Like</Text>
-              <Text style={styles.value}>{current?.feelslike_c}°C</Text>
+              <Text style={[styles.title, { color: colors.text }]}>
+                Feels Like
+              </Text>
+              <Text style={[styles.value, { color: colors.text }]}>
+                {current?.feelslike_c}°C
+              </Text>
             </View>
           </View>
           <View style={styles.box}>
-            <Text style={styles.icon}>༄</Text>
+            <Text style={[styles.icon, { color: colors.text }]}>༄</Text>
             <View>
-              <Text style={styles.title}>Wind Speed</Text>
-              <Text style={styles.value}>{current?.wind_kph} Km/h</Text>
+              <Text style={[styles.title, { color: colors.text }]}>
+                Wind Speed
+              </Text>
+              <Text style={[styles.value, { color: colors.text }]}>
+                {current?.wind_kph} Km/h
+              </Text>
             </View>
           </View>
         </View>
         <View style={styles.itemcontainer}>
           <View style={styles.box}>
-            <Text style={styles.icon}>🟡</Text>
+            <Text style={[styles.icon, { color: colors.text }]}>🟡</Text>
             <View>
-              <Text style={styles.title}>UV Index</Text>
-              <Text style={styles.value}>{current?.uv}</Text>
+              <Text style={[styles.title, { color: colors.text }]}>
+                UV Index
+              </Text>
+              <Text style={[styles.value, { color: colors.text }]}>
+                {current?.uv}
+              </Text>
             </View>
           </View>
           <View style={styles.box}>
-            <Text style={styles.icon}>💧</Text>
+            <Text style={[styles.icon, { color: colors.text }]}>💧</Text>
             <View>
-              <Text style={styles.title}>Humidity</Text>
-              <Text style={styles.value}>{current?.humidity}%</Text>
+              <Text style={[styles.title, { color: colors.text }]}>
+                Humidity
+              </Text>
+              <Text style={[styles.value, { color: colors.text }]}>
+                {current?.humidity}%
+              </Text>
             </View>
           </View>
         </View>
         <View style={styles.itemcontainer}>
           <View style={styles.box}>
-            <Text style={styles.icon}>🌤️</Text>
+            <Text style={[styles.icon, { color: colors.text }]}>🌤️</Text>
             <View>
-              <Text style={styles.title}>Sunrise</Text>
-              <Text style={styles.value}>{astro?.sunrise}</Text>
+              <Text style={[styles.title, { color: colors.text }]}>
+                Sunrise
+              </Text>
+              <Text style={[styles.value, { color: colors.text }]}>
+                {astro?.sunrise}
+              </Text>
             </View>
           </View>
           <View style={styles.box}>
-            <Text style={styles.icon}>🌝</Text>
+            <Text style={[styles.icon, { color: colors.text }]}>🌝</Text>
             <View>
-              <Text style={styles.title}>Sunset</Text>
-              <Text style={styles.value}>{astro?.sunset}</Text>
+              <Text style={[styles.title, { color: colors.text }]}>Sunset</Text>
+              <Text style={[styles.value, { color: colors.text }]}>
+                {astro?.sunset}
+              </Text>
             </View>
           </View>
         </View>

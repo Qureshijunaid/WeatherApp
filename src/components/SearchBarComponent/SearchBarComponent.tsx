@@ -6,6 +6,8 @@ import {
 } from "react-native";
 
 import styles from "./styles";
+import { useTheme } from "../../context/ThemeContext";
+import { lightTheme, darkTheme } from "../../theme/theme";
 import theme from "../../theme";
 
 type Props = {
@@ -15,11 +17,15 @@ type Props = {
 };
 
 const SearchBar = ({ value, onChange, onSearch }: Props) => {
+
+    const { theme } = useTheme();
+    const colors = theme === "light" ? lightTheme : darkTheme;
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,{backgroundColor:colors.background}]}>
       <TextInput
-        placeholderTextColor={theme.color.primary.white}
-        style={styles.input}
+        placeholderTextColor={colors.text }
+        style={[styles.input,{color:colors.text}]}
         value={value}
         onChangeText={onChange}
         placeholder="Enter the city name here..."
@@ -28,10 +34,10 @@ const SearchBar = ({ value, onChange, onSearch }: Props) => {
         accessibilityRole="button"
         disabled={value.length < 2}
         onPress={onSearch}
-        style={styles.button}
+        style={[styles.button,{backgroundColor:colors.buttonBackground}]}
       >
         <Image
-          style={styles.icon}
+          style={[styles.icon,{tintColor:colors.background}]}
           source={require("../../assets/icon/searchicon.png")}
         />
       </TouchableOpacity>

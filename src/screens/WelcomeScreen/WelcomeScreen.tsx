@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
-import { ScrollView, Alert } from "react-native";
+import { ScrollView, Alert, Text, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
-import NetInfo from "@react-native-community/netinfo"; 
+import { useTheme } from "../../context/ThemeContext";
+import { lightTheme, darkTheme } from "../../theme/theme";
+import NetInfo from "@react-native-community/netinfo";
 import styles from "./styles";
 
 import { fetchWeatherData } from "../../redux/slice/weatherSlice";
@@ -24,6 +26,9 @@ const WelcomeScreen: React.FC = () => {
     weatherData = {},
   } = useSelector((state: RootState) => state.weather || {});
 
+  const { theme, toggleTheme } = useTheme();
+  const colors = theme === "light" ? lightTheme : darkTheme;
+
   const [city, setCity] = useState<string>("");
   const [isConnected, setIsConnected] = useState<boolean>(true); // State to track internet connection
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
@@ -33,7 +38,10 @@ const WelcomeScreen: React.FC = () => {
     NetInfo.fetch().then((state) => {
       setIsConnected(state.isConnected); // Update state based on connection
       if (!state.isConnected) {
-        Alert.alert("No internet connection", "Please check your network connection.");
+        Alert.alert(
+          "No internet connection",
+          "Please check your network connection."
+        );
       }
     });
   };
@@ -57,7 +65,10 @@ const WelcomeScreen: React.FC = () => {
 
     // Only fetch weather data if the user is connected to the internet
     if (!isConnected) {
-      Alert.alert("No internet", "Please connect to the internet to fetch weather data.");
+      Alert.alert(
+        "No internet",
+        "Please connect to the internet to fetch weather data."
+      );
       return;
     }
 
@@ -111,6 +122,18 @@ const WelcomeScreen: React.FC = () => {
   return (
     <ScrollView style={styles.container}>
       <SafeAreaView testID="home-screen" style={styles.container}>
+        <Text style={[styles.title, { color: colors.text }]}>
+          Welcome to WeatherApp
+        </Text>
+        <TouchableOpacity
+          onPress={toggleTheme}
+          style={[styles.button, { backgroundColor: colors.buttonBackground }]}
+          activeOpacity={1}
+        >
+          <Text style={[styles.buttonText, { color: colors.buttonText }]}>
+            Switch to {theme === "light" ? "Dark" : "Light"} Theme
+          </Text>
+        </TouchableOpacity>
         <SearchBarComponent
           value={city}
           onChange={handleCityChange} // Use debounced handler here
