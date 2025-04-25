@@ -56,4 +56,12 @@ module.exports = {
       version: 'detect',
     },
   },
+  overrides: [
+    {
+      files: ['__tests__/jestSetup.js'],
+      rules: {
+        '@typescript-eslint/parser': 'off',
+      },
+    },
+  ],
 };

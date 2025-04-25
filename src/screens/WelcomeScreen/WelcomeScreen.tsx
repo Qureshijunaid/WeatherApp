@@ -62,21 +62,15 @@ const WelcomeScreen: React.FC = () => {
 
   // Fetch weather data for the given city
   const handleSearchWeather = async (searchQuery: string) => {
-    if (searchQuery.trim() === "") return; // Avoid unnecessary API calls for empty searches
-
-    // Only fetch weather data if the user is connected to the internet
+    if (searchQuery.trim() === '') return;
     if (!isConnected) {
-      Alert.alert(
-        "No internet",
-        "Please connect to the internet to fetch weather data."
-      );
+      Alert.alert('No internet', 'Please connect to the internet to fetch weather data.');
       return;
     }
-
     try {
-      await dispatch(fetchWeatherData(searchQuery));
-    } catch (err) {
-      // Optional: Add error handling logic (e.g., toast message or log)
+      await dispatch(fetchWeatherData(searchQuery)).unwrap();
+    } catch (err: any) {
+      Alert.alert('Error', err || 'Unable to fetch weather data.');
     }
   };
 

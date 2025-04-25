@@ -1,44 +1,34 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { getWeatherForecast } from '../../services/weatherService';
 
-import apiClient from '../../api/apiClient';
-import constant from '../../constant/constant';
-
-// initial state interface
 interface InitialState {
   loading: 'idle' | 'pending' | 'succeeded' | 'failed';
   error: boolean;
   weatherData: any;
 }
 
-// initial state will be get defined here
 const initialState: InitialState = {
   loading: 'idle',
   error: false,
   weatherData: null,
 };
 
-// fetch weather data
-export const fetchWeatherData: any = createAsyncThunk(
-  'weather',
-  async (city: string, {rejectWithValue}) => {
+export const fetchWeatherData = createAsyncThunk(
+  'weather/fetchWeatherData',
+  async (city: string, { rejectWithValue }) => {
     try {
-      const response = await apiClient.get(
-        `forecast.json?q=${city}&days=1&key=${constant.weatherAPIKey}`,
-      );
+      const response = await getWeatherForecast(city);
       return response.data;
-    } catch (error) {
-      return rejectWithValue(error);
+    } catch (error: any) {
+      return rejectWithValue(error.message || 'Failed to fetch weather data');
     }
-  },
+  }
 );
 
-// passenger slice
 export const weatherSlice = createSlice({
   name: 'weather',
   initialState,
-  // to handle state based reducers
   reducers: {},
-  // to handle api based reducers
   extraReducers: builder => {
     builder
       .addCase(fetchWeatherData.pending, state => {
@@ -51,12 +41,11 @@ export const weatherSlice = createSlice({
         state.error = false;
         state.weatherData = action.payload;
       })
-      .addCase(fetchWeatherData.rejected, state => {
+      .addCase(fetchWeatherData.rejected, (state, action) => {
         state.loading = 'failed';
         state.error = true;
       });
   },
 });
 
-export const {} = weatherSlice.actions;
 export default weatherSlice.reducer;

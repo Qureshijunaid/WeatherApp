@@ -1,10 +1,10 @@
 import React from "react";
 
+// eslint-disable-next-line import/namespace
 import { Text } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { useTheme } from "../../context/ThemeContext";
 import { lightTheme, darkTheme } from "../../theme/theme";
-
 import styles from "./styles";
 
 type Props = {};
