@@ -13,7 +13,7 @@ export const typography = {
       color: color.text.primary,
     },
     heading2: {
-      fontSize: fontSize.s44,
+      fontSize: fontSize.s30,
       fontStyle: fontStyle.normal,
       fontWeight: fontWeight.w500,
       lineHeight: fontSize.s52,
@@ -38,10 +38,10 @@ export const typography = {
       color: color.text.primary,
     },
     subHeading2: {
-      fontSize: fontSize.s20,
+      fontSize: fontSize.s12,
       fontStyle: fontStyle.normal,
       fontWeight: fontWeight.w500,
-      lineHeight: fontSize.s32,
+      lineHeight: fontSize.s20,
       color: color.text.primary,
     },
     subHeading3: {
@@ -92,10 +92,9 @@ export const typography = {
       color: color.text.secondary,
     },
     light: {
-      fontSize: fontSize.s14,
+      fontSize: fontSize.s12,
       fontStyle: fontStyle.normal,
       fontWeight: fontWeight.w300,
-      lineHeight: fontSize.s20,
       color: color.text.secondary,
     },
   },
@@ -136,7 +135,6 @@ export const typography = {
     fontSize: fontSize.s14,
     fontStyle: fontStyle.normal,
     fontWeight: fontWeight.w300,
-    lineHeight: fontSize.s20,
     color: color.text.secondary,
   },
 };

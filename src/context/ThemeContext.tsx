@@ -1,7 +1,6 @@
 // src/context/ThemeContext.tsx
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-
-import { useColorScheme } from 'react-native';
+import { storage } from '../redux/store';
 
 type ThemeType = 'light' | 'dark';
 
@@ -13,15 +12,21 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const colorScheme = useColorScheme();
   const [theme, setTheme] = useState<ThemeType>('light');
 
   useEffect(() => {
-    setTheme(colorScheme === 'dark' ? 'dark' : 'light');
-  }, [colorScheme]);
+    const storedTheme = storage.getString('theme');
+    if (storedTheme === 'light' || storedTheme === 'dark') {
+      setTheme(storedTheme);
+    } else {
+      setTheme('light'); // fallback
+    }
+  }, []);
 
   const toggleTheme = () => {
-    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    storage.set('theme', newTheme); // persist in MMKV
   };
 
   return (

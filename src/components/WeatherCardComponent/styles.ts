@@ -4,16 +4,35 @@ import theme from "../../theme";
 import { vh, vw } from "../../utils/dimension";
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
   box: { alignItems: "center", flexDirection: "row", gap: 10 },
   cityName: {
-    ...theme.typography.bodyMedium.light,
+    ...theme.typography.bodyMedium.medium,
+    fontSize: vw(20),
     letterSpacing: 3,
-    textAlign: "center",
+    textTransform: "uppercase",
+  },
+  countryName: {
+    ...theme.typography.bodyMedium.light,
+    marginTop: vh(5),
+    letterSpacing: 3,
     textTransform: "uppercase",
   },
   container: {
-     gap: 10,
-    padding: vh(20),
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderRadius: vw(20),
+    padding: vw(15),
+  },
+  windContainer: {
+    borderRadius: vw(20),
+    padding: vw(15),
+    marginTop: vh(20),
   },
   date: {
     ...theme.typography.bodyMedium.medium,
@@ -21,14 +40,19 @@ const styles = StyleSheet.create({
   },
   gradient: {
     borderRadius: vw(30),
-    marginTop: vh(50),
+    flex: 1,
+    justifyContent: "center",
   },
   icon: {
     color: theme.color.primary.white,
-    fontSize: 40,
-    fontWeight: "100",
+    fontSize: 20,
+    fontWeight: "medium",
     letterSpacing: 3,
-    textTransform: "uppercase",
+  },
+  windText: {
+    fontSize: vh(20),
+    fontWeight: "500",
+    letterSpacing: 3,
   },
   itemcontainer: {
     alignItems: "center",
@@ -40,30 +64,35 @@ const styles = StyleSheet.create({
   },
   temperature: {
     ...theme.typography.heading.heading2,
-    fontSize: vw(50),
     letterSpacing: 3,
-    textAlign: "center",
     textTransform: "uppercase",
   },
   title: {
-    ...theme.typography.bodySmall.regular,
+    ...theme.typography.bodySmall.medium,
   },
   value: {
     ...theme.typography.bodyMedium.regular,
   },
   weatherDescription: {
     ...theme.typography.subHeading.subHeading2,
-    letterSpacing: 3,
+    marginBottom: vh(20),
     textAlign: "center",
     textTransform: "uppercase",
   },
   weatherLogo: {
-    color: theme.color.primary.white,
-    fontSize: vw(100),
-    fontWeight: "100",
-    letterSpacing: 3,
+    fontSize: vw(50),
     textAlign: "center",
-    textTransform: "uppercase",
+  },
+  windSubContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: vh(10),
+  },
+  locationContainer: { alignItems: "center", justifyContent: "center" },
+  weatherContainer: {
+    width: "40%",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

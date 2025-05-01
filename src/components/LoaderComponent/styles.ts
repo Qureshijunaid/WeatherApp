@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
+import { vh, vw } from "../../utils/dimension";
 
 const styles = StyleSheet.create({
     animation: {
-      height: 400,
-      width: 400,
+      height: vh(200),
+      width: vw(200),
     },
     container: {
       alignItems: "center",

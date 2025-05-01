@@ -29,100 +29,88 @@ const WeatherCardComponent = ({}: Props) => {
   };
 
   return (
-    <>
-      <LinearGradient style={styles.gradient} colors={colors.gradienBackground}>
-        <View style={styles.container}>
-          <Text style={styles.weatherLogo}>
-            {getWeatherIcon(current?.condition?.code)}
+    <View style={styles.gradient}>
+      <View style={[styles.container, { backgroundColor: colors.background }]}>
+        <View style={styles.locationContainer}>
+          <Text style={[styles.cityName, { color: colors.text }]}>
+            {location?.name}
+          </Text>
+          <Text style={[styles.countryName, { color: colors.text }]}>
+            {location?.country}
           </Text>
           <Text style={[styles.temperature, { color: colors.text }]}>
             {current?.temp_c}°C
           </Text>
+        </View>
+        <View
+          style={styles.weatherContainer}
+        >
+          <Text style={styles.weatherLogo}>
+            {getWeatherIcon(current?.condition?.code)}
+          </Text>
           <Text style={[styles.weatherDescription, { color: colors.text }]}>
-            It's {current?.condition?.text} today
-          </Text>
-          <Text style={[styles.date, { color: colors.text }]}>
-            {moment.unix(location?.localtime_epoch).format("dddd, DD MMM")}
-          </Text>
-          <Text style={[styles.cityName, { color: colors.text }]}>
-            {location?.name}
-            {location?.name !== location?.region && `,${location?.region}`}
+            {current?.condition?.text}
           </Text>
         </View>
-      </LinearGradient>
-      <LinearGradient style={styles.gradient} colors={colors.gradienBackground}>
-        <View style={styles.itemcontainer}>
-          <View style={styles.box}>
-            <Text style={[styles.icon, { color: colors.text }]}>🌡️</Text>
-            <View>
-              <Text style={[styles.title, { color: colors.text }]}>
-                Feels Like
-              </Text>
-              <Text style={[styles.value, { color: colors.text }]}>
-                {current?.feelslike_c}°C
-              </Text>
-            </View>
-          </View>
-          <View style={styles.box}>
-            <Text style={[styles.icon, { color: colors.text }]}>༄</Text>
-            <View>
-              <Text style={[styles.title, { color: colors.text }]}>
-                Wind Speed
-              </Text>
-              <Text style={[styles.value, { color: colors.text }]}>
-                {current?.wind_kph} Km/h
-              </Text>
-            </View>
-          </View>
+      </View>
+      <View
+        style={[styles.windContainer, { backgroundColor: colors.background }]}
+      >
+        <Text style={[styles.windText, { color: colors.text }]}>༄ Wind</Text>
+        <View style={styles.windSubContainer}>
+          <Text style={[styles.title, { color: colors.text }]}>Wind</Text>
+          <Text style={[styles.value, { color: colors.text }]}>
+            {current?.wind_kph} Km/h
+          </Text>
         </View>
-        <View style={styles.itemcontainer}>
-          <View style={styles.box}>
-            <Text style={[styles.icon, { color: colors.text }]}>🟡</Text>
-            <View>
-              <Text style={[styles.title, { color: colors.text }]}>
-                UV Index
-              </Text>
-              <Text style={[styles.value, { color: colors.text }]}>
-                {current?.uv}
-              </Text>
-            </View>
-          </View>
-          <View style={styles.box}>
-            <Text style={[styles.icon, { color: colors.text }]}>💧</Text>
-            <View>
-              <Text style={[styles.title, { color: colors.text }]}>
-                Humidity
-              </Text>
-              <Text style={[styles.value, { color: colors.text }]}>
-                {current?.humidity}%
-              </Text>
-            </View>
-          </View>
+        <View style={styles.windSubContainer}>
+          <Text style={[styles.title, { color: colors.text }]}>Pressure</Text>
+          <Text style={[styles.value, { color: colors.text }]}>
+            {current?.pressure_mb} hpa
+          </Text>
         </View>
-        <View style={styles.itemcontainer}>
-          <View style={styles.box}>
-            <Text style={[styles.icon, { color: colors.text }]}>🌤️</Text>
-            <View>
-              <Text style={[styles.title, { color: colors.text }]}>
-                Sunrise
-              </Text>
-              <Text style={[styles.value, { color: colors.text }]}>
-                {astro?.sunrise}
-              </Text>
-            </View>
-          </View>
-          <View style={styles.box}>
-            <Text style={[styles.icon, { color: colors.text }]}>🌝</Text>
-            <View>
-              <Text style={[styles.title, { color: colors.text }]}>Sunset</Text>
-              <Text style={[styles.value, { color: colors.text }]}>
-                {astro?.sunset}
-              </Text>
-            </View>
-          </View>
+      </View>
+
+      <View
+        style={[styles.windContainer, { backgroundColor: colors.background }]}
+      >
+        <Text style={[styles.windText, { color: colors.text }]}>
+          🌡️ Feels Like
+        </Text>
+        <View style={styles.windSubContainer}>
+          <Text style={[styles.title, { color: colors.text }]}>Feels Like</Text>
+          <Text style={[styles.value, { color: colors.text }]}>
+            {current?.feelslike_c}°C
+          </Text>
         </View>
-      </LinearGradient>
-    </>
+        <View style={styles.windSubContainer}>
+          <Text style={[styles.title, { color: colors.text }]}>Humidity</Text>
+          <Text style={[styles.value, { color: colors.text }]}>
+            {current?.humidity} %
+          </Text>
+        </View>
+      </View>
+
+      <View
+        style={[styles.windContainer, { backgroundColor: colors.background }]}
+      >
+        <Text style={[styles.windText, { color: colors.text }]}>
+          🌤️ Twilight
+        </Text>
+        <View style={styles.windSubContainer}>
+          <Text style={[styles.title, { color: colors.text }]}>Sunrise</Text>
+          <Text style={[styles.value, { color: colors.text }]}>
+            {astro?.sunrise}
+          </Text>
+        </View>
+        <View style={styles.windSubContainer}>
+          <Text style={[styles.title, { color: colors.text }]}>Sunset</Text>
+          <Text style={[styles.value, { color: colors.text }]}>
+            {astro?.sunset}
+          </Text>
+        </View>
+      </View>
+    </View>
   );
 };
 

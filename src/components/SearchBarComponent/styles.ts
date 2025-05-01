@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/namespace
 import { StyleSheet } from "react-native";
 
 import theme from "../../theme";

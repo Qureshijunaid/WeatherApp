@@ -1,5 +1,5 @@
-import {combineReducers, configureStore} from '@reduxjs/toolkit';
-import {MMKV} from 'react-native-mmkv';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { MMKV } from 'react-native-mmkv';
 import {
   persistReducer,
   persistStore,
@@ -8,9 +8,8 @@ import {
 
 import weatherReducer from './slice/weatherSlice';
 
-
-// local storage for redux persist using react native mmkv
-const storage = new MMKV();
+// MMKV instance for Redux Persist 
+export const storage = new MMKV();
 
 export const reduxPersistStorage: Storage = {
   setItem: (key: string, value: string) => {
@@ -19,8 +18,7 @@ export const reduxPersistStorage: Storage = {
   },
   getItem: (key: string) => {
     const value = storage.getString(key);
-
-    return Promise.resolve(value);
+    return Promise.resolve(value ?? null);
   },
   removeItem: (key: string) => {
     storage.delete(key);
@@ -28,45 +26,33 @@ export const reduxPersistStorage: Storage = {
   },
 };
 
-
-
-// persist config
+// Redux Persist config
 const persistConfig = {
   key: 'root',
   storage: reduxPersistStorage,
-  transforms: [
-  ],
-  blacklist: [
-  ],
+  blacklist: [], // Add any slices here you don’t want persisted
 };
 
-export type RootState = ReturnType<typeof rootReducer>;
+// Combine reducers
+const rootReducer = combineReducers({
+  weather: weatherReducer,
+});
 
-
-const initialReducers = {
- 'weather': weatherReducer,
-};
-
-// combining reducers
-const rootReducer = combineReducers(initialReducers);
-
-// persisted reducer
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// configure redux store
-const store = configureStore({
+// Store setup
+export const store = configureStore({
   reducer: persistedReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
-      immutableCheck: false,
       serializableCheck: false,
+      immutableCheck: false,
     }),
-  enhancers: getDefaultEnhancers => getDefaultEnhancers().concat(),
 });
 
+// Persistor setup
+export const persistor = persistStore(store);
 
-
-// persistor store
-const persistor = persistStore(store);
-
-export {persistor, store};
+// Infer types for usage
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = typeof store.dispatch;

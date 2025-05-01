@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 
-import { ScrollView, Alert, Text, TouchableOpacity } from "react-native";
+import { ScrollView, Alert, Text, TouchableOpacity, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 import NetInfo from "@react-native-community/netinfo";
+import LinearGradient from "react-native-linear-gradient";
 
 import { useTheme } from "../../context/ThemeContext";
 import { lightTheme, darkTheme } from "../../theme/theme";
@@ -39,7 +40,7 @@ const WelcomeScreen: React.FC = () => {
     NetInfo.fetch().then((state) => {
       setIsConnected(state.isConnected); // Update state based on connection
       if (!state.isConnected) {
-        Alert.alert(
+        console.warn(
           "No internet connection",
           "Please check your network connection."
         );
@@ -62,15 +63,18 @@ const WelcomeScreen: React.FC = () => {
 
   // Fetch weather data for the given city
   const handleSearchWeather = async (searchQuery: string) => {
-    if (searchQuery.trim() === '') return;
+    if (searchQuery.trim() === "") return;
     if (!isConnected) {
-      Alert.alert('No internet', 'Please connect to the internet to fetch weather data.');
+      Alert.alert(
+        "No internet",
+        "Please connect to the internet to fetch weather data."
+      );
       return;
     }
     try {
       await dispatch(fetchWeatherData(searchQuery)).unwrap();
     } catch (err: any) {
-      Alert.alert('Error', err || 'Unable to fetch weather data.');
+      console.warn("Error", err || "Unable to fetch weather data.");
     }
   };
 
@@ -84,7 +88,7 @@ const WelcomeScreen: React.FC = () => {
 
     debounceTimeout.current = setTimeout(() => {
       handleSearchWeather(text);
-    }, 500); // Adjust debounce delay (500ms) as needed
+    }, 1200); // Adjust debounce delay (1200ms) as needed
   };
 
   // Auto-fetch weather data on initial load if location name exists
@@ -115,28 +119,32 @@ const WelcomeScreen: React.FC = () => {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <SafeAreaView testID="home-screen" style={styles.container}>
-        <Text style={[styles.title, { color: colors.text }]}>
-          Welcome to WeatherApp
-        </Text>
-        <TouchableOpacity
-          onPress={toggleTheme}
-          style={[styles.button, { backgroundColor: colors.buttonBackground }]}
-          activeOpacity={1}
-        >
-          <Text style={[styles.buttonText, { color: colors.buttonText }]}>
-            Switch to {theme === "light" ? "Dark" : "Light"} Theme
-          </Text>
-        </TouchableOpacity>
-        <SearchBarComponent
-          value={city}
-          onChange={handleCityChange} // Use debounced handler here
-          onSearch={() => handleSearchWeather(city)}
-        />
-        {renderContent()}
-      </SafeAreaView>
-    </ScrollView>
+    <LinearGradient
+      style={styles.mainContainer}
+      colors={colors.gradienBackground}
+    >
+      <ScrollView style={styles.container}>
+        <SafeAreaView testID="home-screen" style={styles.container}>
+          <TouchableOpacity
+            onPress={toggleTheme}
+            style={[styles.button]}
+            activeOpacity={1}
+          >
+
+            <Image
+              source={require("../../assets/icon/darklight.png")}
+              style={styles.darklight}
+            />
+          </TouchableOpacity>
+          <SearchBarComponent
+            value={city}
+            onChange={handleCityChange} // Use debounced handler here
+            onSearch={() => handleSearchWeather(city)}
+          />
+          {renderContent()}
+        </SafeAreaView>
+      </ScrollView>
+    </LinearGradient>
   );
 };
 

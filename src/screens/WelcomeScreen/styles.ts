@@ -6,11 +6,7 @@ const styles = StyleSheet.create({
   button: {
     alignItems: "center",
     alignSelf: "flex-end",
-    borderRadius: vw(8),
     justifyContent: "center",
-    paddingHorizontal: vw(24),
-    paddingVertical: vh(12),
-    width: "50%",
   },
   buttonText: {
     fontSize: vw(16),
@@ -18,16 +14,24 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   container: {
-    backgroundColor: "#808080",
     flex: 1,
-    gap: 15,
+    gap: 30,
     padding: 7,
     paddingBottom: vh(35),
+  },
+  mainContainer: {
+    flex: 1,
+    justifyContent: "center",
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: vh(32),
+  },
+  darklight: {
+    height: vh(40),
+    resizeMode: "contain",
+    width: vw(40),
   },
 });
 
